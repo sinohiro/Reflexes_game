@@ -10,17 +10,17 @@ public class Result : MonoBehaviour{
     private bool firstPush = false;
 
     void Start(){
-        Alertscript = GameObject.Find("Image").GetComponent<Alert>(); //GetComponentはスクリプト名
-        Debug.Log(Alertscript.result);
+        //Alertscript = GameObject.Find("alert_Image").GetComponent<Alert>(); //GetComponentはスクリプト名
+        Debug.Log(Alert.result);
     }
 
     // Update is called once per frame
     void Update(){
         // テキストの表示を入れ替える
-        if(Alertscript.result == -1){
-            ResultText.text = "お手つきはいけません!!";
+        if(Alert.result == -1){
+            ResultText.text = "Too early!!";
         }else{
-            ResultText.text = Alertscript.result + "ms";
+            ResultText.text = Alert.result + "ms";
         }
 
         if (Input.GetKeyDown(KeyCode.Space)){
@@ -33,6 +33,8 @@ public class Result : MonoBehaviour{
         if(!firstPush){
             Debug.Log("Go Next Scene");
             firstPush = true;
+            //Alert.result = -1;
+            //Alert.otetuki_count = 0;
             //次のシーンへスクリプト
             SceneManager.LoadScene("titleScene");
         }
