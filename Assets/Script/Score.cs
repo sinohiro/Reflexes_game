@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;  // 追加しましょう
 
-public class Result : MonoBehaviour{
+public class Score : MonoBehaviour{
     Alert Alertscript;
-    public Text ResultText; // Textオブジェクト
+    public Text ScoreText1; // Textオブジェクト
+    public Text ScoreText2;
+    public Text ScoreText3;
+    public Text ScoreTexthi;
     private bool firstPush = false;
 
     void Start(){
@@ -17,22 +20,10 @@ public class Result : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         // テキストの表示を入れ替える
-        if(Alert.result == -1){
-            ResultText.text = "Too early!!";
-        }else{
-            ResultText.text = Alert.result + "ms";
-            if(PlayerPrefs.GetInt( "ScoreTextHi") > Alert.result){
-                PlayerPrefs.SetInt( "ScoreTextHi" , Alert.result );
-                PlayerPrefs.Save();
-            }else{
-                PlayerPrefs.SetInt( "ScoreText3" , PlayerPrefs.GetInt( "ScoreText2"));
-                PlayerPrefs.Save();
-                PlayerPrefs.SetInt( "ScoreText2" , PlayerPrefs.GetInt( "ScoreText1"));
-                PlayerPrefs.Save();
-                PlayerPrefs.SetInt( "ScoreText1" , Alert.result );
-                PlayerPrefs.Save();
-            }
-        }
+        ScoreText1.text = PlayerPrefs.GetInt( "ScoreText1") + "ms";
+        ScoreText2.text = PlayerPrefs.GetInt( "ScoreText2") + "ms";
+        ScoreText3.text = PlayerPrefs.GetInt( "ScoreText3") + "ms";
+        ScoreTexthi.text = PlayerPrefs.GetInt( "ScoreTextHi") + "ms";
 
         if (Input.GetKeyDown(KeyCode.Space)){
             PressMemory();
